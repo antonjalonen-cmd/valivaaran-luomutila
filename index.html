@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Välivaaran luomutila – Luomumansikka ja hunaja, Kajoo</title>
+  <meta name="description" content="Välivaaran luomutila tuottaa sertifioitua luomumansikkaa ja luomuhunajaa Pohjois-Karjalassa, Juuan Kajoossa. Tervetuloa tutustumaan luomuun sen parhaimmillaan.">
+  <meta property="og:title" content="Välivaaran luomutila">
+  <meta property="og:description" content="Luomumansikka ja hunaja suoraan tilalta – Kajoo, Juuka">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Tokens ───────────────────────────────────────────────────── */
+    :root {
+      --forest:      #1a2a14;
+      --forest-mid:  #2e4822;
+      --forest-lt:   #3d6030;
+      --berry:       #c4344a;
+      --berry-dk:    #a02838;
+      --berry-lt:    #e05870;
+      --amber:       #c88a1a;
+      --amber-dk:    #a06810;
+      --amber-lt:    #e4a820;
+      --cream:       #f5f2ec;
+      --cream-dk:    #ede9e0;
+      --cream-dkr:   #d8d0c0;
+      --ink:         #1a1e16;
+      --ink-lt:      #3a3e36;
+      --r:           16px;
+      --r-sm:        8px;
+    }
+
+    /* ── Reset ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+    body {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.6;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── i18n ────────────────────────────────────────────────────── */
+    .lang-sv, .lang-en { display: none; }
+    body.lang-sv .lang-fi, body.lang-en .lang-fi { display: none; }
+    body.lang-sv .lang-sv { display: unset; }
+    body.lang-en .lang-en { display: unset; }
+    .i18n-block.lang-sv, .i18n-block.lang-en { display: none; }
+    body.lang-sv .i18n-block.lang-sv { display: block; }
+    body.lang-en .i18n-block.lang-en { display: block; }
+
+    /* ── Nav ─────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--forest);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .nav-wordmark {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+    .nav-wordmark span {
+      display: block;
+      font-size: 0.65rem;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,.55);
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.6rem;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,.75);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .lang-btns {
+      display: flex;
+      gap: 0.3rem;
+    }
+    .lang-btns button {
+      background: none;
+      border: 1px solid rgba(245,242,236,.25);
+      color: rgba(245,242,236,.6);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .lang-btns button:hover,
+    .lang-btns button.active {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: var(--ink);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    /* ── Hero ────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      padding-top: 64px;
+      display: grid;
+      grid-template-columns: 52% 48%;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(3rem, 8vw, 6rem) clamp(2rem, 6vw, 5rem) clamp(3rem, 8vw, 6rem) clamp(2rem, 8vw, 7rem);
+      background: var(--cream);
+    }
+    .hero-eyebrow {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--forest-mid);
+      margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+      font-weight: 500;
+      line-height: 1.08;
+      color: var(--ink);
+      margin-bottom: 1.6rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--berry);
+    }
+    .hero-tagline {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      color: var(--ink-lt);
+      max-width: 38ch;
+      margin-bottom: 2.8rem;
+      line-height: 1.65;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .btn-primary {
+      background: var(--berry);
+      color: var(--cream);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border-radius: var(--r-sm);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover {
+      background: var(--berry-dk);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--forest);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border: 2px solid var(--forest);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-outline:hover {
+      background: var(--forest);
+      color: var(--cream);
+    }
+
+    /* Hexagonal mosaic panel */
+    .hero-mosaic {
+      background: var(--forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hex-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 2rem;
+      transform: rotate(-5deg) scale(1.15);
+      opacity: 0.92;
+    }
+    .hex-row {
+      display: flex;
+      gap: 5px;
+    }
+    .hex-row:nth-child(even) {
+      margin-left: 46px;
+    }
+    .hex {
+      width: 84px;
+      height: 84px;
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      background: var(--hc, #333);
+      flex-shrink: 0;
+      transition: opacity .3s;
+    }
+    .hero-mosaic-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 30% 50%, rgba(26,42,20,.7) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    /* Forest label pinned to mosaic */
+    .hero-mosaic-label {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2.5rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: rgba(245,242,236,.5);
+      letter-spacing: 0.08em;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      pointer-events: none;
+    }
+
+    /* ── Stats strip ─────────────────────────────────────────────── */
+    .stats {
+      background: var(--forest);
+      color: var(--cream);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 3px solid var(--berry);
+    }
+    .stat {
+      padding: 2rem 2.4rem;
+      border-right: 1px solid rgba(245,242,236,.1);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-val {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 500;
+      color: var(--amber-lt);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(245,242,236,.65);
+      text-transform: uppercase;
+    }
+
+    /* ── Section shared ──────────────────────────────────────────── */
+    section { padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 7vw, 6rem); }
+    .section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--berry);
+      margin-bottom: 0.9rem;
+    }
+    .section-title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 1.6rem;
+    }
+    .section-title em { font-style: italic; color: var(--berry); }
+    .section-lead {
+      font-size: 1.08rem;
+      font-weight: 300;
+      color: var(--ink-lt);
+      max-width: 62ch;
+      line-height: 1.7;
+    }
+
+    /* ── Products section ────────────────────────────────────────── */
+    .tuotteet {
+      background: var(--cream-dk);
+    }
+    .tuotteet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 3.5rem;
+    }
+    .tuote-card {
+      background: var(--cream);
+      padding: 3rem 3rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .tuote-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--card-accent, var(--berry));
+    }
+    .tuote-card.honey::before {
+      background: var(--amber);
+    }
+    /* Placeholder photo */
+    .ph {
+      width: 100%;
+      height: 240px;
+      background: var(--cream-dkr);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    .ph img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: var(--r);
+    }
+    .ph-icon {
+      font-size: 2.5rem;
+      opacity: 0.3;
+    }
+    .tuote-num {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--card-accent, var(--berry));
+    }
+    .tuote-card.honey .tuote-num { color: var(--amber); }
+    .tuote-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .tuote-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--ink-lt);
+      line-height: 1.7;
+      max-width: 50ch;
+    }
+    .tuote-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 40px;
+      border: 1px solid var(--card-accent, var(--berry));
+      color: var(--card-accent, var(--berry));
+    }
+    .tuote-card.honey .tag {
+      border-color: var(--amber-dk);
+      color: var(--amber-dk);
+    }
+
+    /* ── Story section ───────────────────────────────────────────── */
+    .tarina {
+      background: var(--cream);
+    }
+    .tarina-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .tarina-text { max-width: 52ch; }
+    .tarina-body {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink-lt);
+      line-height: 1.8;
+      margin-top: 1.6rem;
+    }
+    .tarina-body p + p { margin-top: 1.1rem; }
+    .tarina-quote {
+      margin-top: 2.4rem;
+      padding: 1.6rem 2rem;
+      border-left: 3px solid var(--berry);
+      background: var(--cream-dk);
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+    .tarina-quote blockquote {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .tarina-quote cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--berry);
+      font-style: normal;
+    }
+    .tarina-visual { display: flex; flex-direction: column; gap: 1.5rem; }
+    .tarina-ph-main {
+      width: 100%;
+      height: 380px;
+      background: var(--cream-dkr);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .tarina-ph-main img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: var(--r);
+    }
+    .tarina-ph-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .tarina-ph-sm {
+      height: 200px;
+      background: var(--cream-dkr);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .tarina-ph-sm img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: var(--r);
+    }
+
+    /* ── Vuosikello (seasonal calendar) signature component ──────── */
+    .vuosikello {
+      background: var(--forest);
+      color: var(--cream);
+    }
+    .vuosikello-header {
+      max-width: 56ch;
+      margin-bottom: 4rem;
+    }
+    .vuosikello-header .section-eyebrow { color: var(--amber-lt); }
+    .vuosikello-header .section-title { color: var(--cream); }
+    .vuosikello-header .section-lead { color: rgba(245,242,236,.7); }
+    .kello-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+    }
+    .kello-month {
+      background: rgba(245,242,236,.04);
+      border: 1px solid rgba(245,242,236,.1);
+      padding: 1.6rem 1.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      position: relative;
+      transition: background .2s;
+      border-radius: var(--r-sm);
+    }
+    .kello-month:hover {
+      background: rgba(245,242,236,.09);
+    }
+    .kello-month.active-berry {
+      border-color: var(--berry);
+      background: rgba(196,52,74,.12);
+    }
+    .kello-month.active-amber {
+      border-color: var(--amber);
+      background: rgba(200,138,26,.12);
+    }
+    .kello-month.active-light {
+      background: rgba(245,242,236,.07);
+    }
+    .kello-month-name {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,.5);
+    }
+    .kello-month.active-berry .kello-month-name { color: var(--berry-lt); }
+    .kello-month.active-amber .kello-month-name { color: var(--amber-lt); }
+    .kello-dot-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .kello-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(245,242,236,.2);
+    }
+    .kello-dot.berry { background: var(--berry); }
+    .kello-dot.amber { background: var(--amber); }
+    .kello-dot.green { background: var(--forest-lt); }
+    .kello-activity {
+      font-size: 0.78rem;
+      font-weight: 300;
+      line-height: 1.5;
+      color: rgba(245,242,236,.6);
+    }
+    .kello-month.active-berry .kello-activity { color: rgba(245,242,236,.85); }
+    .kello-month.active-amber .kello-activity { color: rgba(245,242,236,.85); }
+    .kello-legend {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.4rem;
+    }
+    .kello-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(245,242,236,.6);
+    }
+    .kello-legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    /* ── Kestava section ─────────────────────────────────────────── */
+    .kestava {
+      background: var(--cream-dk);
+    }
+    .kestava-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .periaate-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .periaate {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .periaate-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      color: var(--cream);
+    }
+    .periaate-text h4 {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .periaate-text p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--ink-lt);
+      line-height: 1.65;
+    }
+    .kestava-cert {
+      background: var(--cream);
+      border-radius: var(--r);
+      padding: 2.5rem;
+      border: 1px solid var(--cream-dkr);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .kestava-cert-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .kestava-cert p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink-lt);
+    }
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--forest);
+      color: var(--cream);
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--r-sm);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      width: fit-content;
+    }
+
+    /* ── Gallery ─────────────────────────────────────────────────── */
+    .galleria {
+      background: var(--cream);
+      padding-bottom: clamp(2rem, 5vw, 4rem);
+    }
+    .galleria-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 280px 280px;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .gal-cell {
+      background: var(--cream-dkr);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .gal-cell img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .gal-cell.tall {
+      grid-row: 1 / 3;
+    }
+
+    /* ── Contact ─────────────────────────────────────────────────── */
+    .yhteystiedot {
+      background: var(--forest);
+      color: var(--cream);
+    }
+    .yht-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .yht-info .section-eyebrow { color: var(--amber-lt); }
+    .yht-info .section-title { color: var(--cream); }
+    .yht-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2rem;
+    }
+    .yht-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(245,242,236,.1);
+    }
+    .yht-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,.45);
+    }
+    .yht-val {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(245,242,236,.85);
+      line-height: 1.5;
+    }
+    .yht-val a { color: var(--amber-lt); transition: color .2s; }
+    .yht-val a:hover { color: var(--cream); }
+    .yht-map {
+      background: rgba(245,242,236,.05);
+      border: 1px solid rgba(245,242,236,.12);
+      border-radius: var(--r);
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .yht-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: var(--r);
+      filter: grayscale(40%) invert(5%);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: rgba(245,242,236,.5);
+      padding: 1.8rem clamp(1.5rem, 7vw, 6rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(245,242,236,.6);
+    }
+    .footer-credit {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+    .footer-credit a {
+      color: var(--amber-lt);
+      transition: color .2s;
+    }
+    .footer-credit a:hover { color: var(--cream); }
+
+    /* ── Animations ──────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .hero-text > * {
+      animation: fadeUp .7s ease both;
+    }
+    .hero-eyebrow { animation-delay: .1s; }
+    .hero-name    { animation-delay: .22s; }
+    .hero-tagline { animation-delay: .34s; }
+    .hero-ctas    { animation-delay: .46s; }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-mosaic {
+        height: 360px;
+        order: -1;
+      }
+      .hero-text {
+        padding: 3rem 2rem;
+      }
+      .tuotteet-grid {
+        grid-template-columns: 1fr;
+      }
+      .tarina-inner,
+      .kestava-inner,
+      .yht-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .kello-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .galleria-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 220px 220px;
+      }
+      .gal-cell.tall { grid-row: auto; }
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .kello-grid { grid-template-columns: repeat(2, 1fr); }
+      .galleria-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* Mobile nav */
+    .mobile-menu {
+      position: fixed;
+      top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--forest);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-wordmark">
+      Välivaaran <em style="font-style:italic;color:var(--amber-lt)">luomutila</em>
+      <span>
+        <span class="lang-fi">Kajoo, Juuka</span>
+        <span class="lang-sv">Kajoo, Juuka</span>
+        <span class="lang-en">Kajoo, Juuka</span>
+      </span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#tuotteet"><span class="lang-fi">Tuotteet</span><span class="lang-sv">Produkter</span><span class="lang-en">Products</span></a></li>
+      <li><a href="#tarina"><span class="lang-fi">Tila</span><span class="lang-sv">Gården</span><span class="lang-en">Farm</span></a></li>
+      <li><a href="#vuosikello"><span class="lang-fi">Satokausi</span><span class="lang-sv">Skördesäsong</span><span class="lang-en">Season</span></a></li>
+      <li><a href="#yhteystiedot"><span class="lang-fi">Yhteystiedot</span><span class="lang-sv">Kontakt</span><span class="lang-en">Contact</span></a></li>
+    </ul>
+    <div class="lang-btns">
+      <button onclick="setLang('fi')" id="btn-fi" class="active">FI</button>
+      <button onclick="setLang('sv')" id="btn-sv">SV</button>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Valikko" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#tuotteet" onclick="toggleMenu()"><span class="lang-fi">Tuotteet</span><span class="lang-sv">Produkter</span><span class="lang-en">Products</span></a>
+  <a href="#tarina" onclick="toggleMenu()"><span class="lang-fi">Tila</span><span class="lang-sv">Gården</span><span class="lang-en">Farm</span></a>
+  <a href="#vuosikello" onclick="toggleMenu()"><span class="lang-fi">Satokausi</span><span class="lang-sv">Skördesäsong</span><span class="lang-en">Season</span></a>
+  <a href="#yhteystiedot" onclick="toggleMenu()"><span class="lang-fi">Yhteystiedot</span><span class="lang-sv">Kontakt</span><span class="lang-en">Contact</span></a>
+</div>
+
+<!-- ── HERO ──────────────────────────────────────────────────────── -->
+<section class="hero" id="top">
+  <div class="hero-text">
+    <p class="hero-eyebrow">
+      <span class="lang-fi">Luomutila, Kajoo &bull; Pohjois-Karjala</span>
+      <span class="lang-sv">Ekologisk gård, Kajoo &bull; Norra Karelen</span>
+      <span class="lang-en">Organic Farm, Kajoo &bull; North Karelia</span>
+    </p>
+    <h1 class="hero-name">
+      <span class="lang-fi">Mansikan<em>maku</em><br>metsän laidalla</span>
+      <span class="lang-sv">Jordgubbens<em>smak</em><br>vid skogens kant</span>
+      <span class="lang-en">The taste of<br><em>summer</em> berries</span>
+    </h1>
+    <p class="hero-tagline">
+      <span class="lang-fi">Luomuviljeltyjä mansikoita ja puhdasta hunajaa Pohjois-Karjalan metsien helmestä. Kajoossa, Juuassa.</span>
+      <span class="lang-sv">Ekologiska jordgubbar och ren honung fran hjärtat av Norra Karelens skogar. I Kajoo, Juuka.</span>
+      <span class="lang-en">Certified organic strawberries and pure honey from the heart of North Karelia's forests. In Kajoo, Juuka.</span>
+    </p>
+    <div class="hero-ctas">
+      <a href="#tuotteet" class="btn-primary">
+        <span class="lang-fi">Tutki tuotteitamme</span>
+        <span class="lang-sv">Utforska produkterna</span>
+        <span class="lang-en">Explore our products</span>
+      </a>
+      <a href="#yhteystiedot" class="btn-outline">
+        <span class="lang-fi">Ota yhteyttä</span>
+        <span class="lang-sv">Kontakta oss</span>
+        <span class="lang-en">Get in touch</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hexagonal berry-honey mosaic -->
+  <div class="hero-mosaic" aria-hidden="true">
+    <div class="hex-grid">
+      <!-- Row 1 -->
+      <div class="hex-row">
+        <div class="hex" style="--hc:#c4344a"></div>
+        <div class="hex" style="--hc:#c88a1a"></div>
+        <div class="hex" style="--hc:#2e4822"></div>
+        <div class="hex" style="--hc:#e05870; opacity:.7"></div>
+        <div class="hex" style="--hc:#a06810"></div>
+      </div>
+      <!-- Row 2 (offset) -->
+      <div class="hex-row">
+        <div class="hex" style="--hc:#1a2a14"></div>
+        <div class="hex" style="--hc:#a02838"></div>
+        <div class="hex" style="--hc:#e4a820; opacity:.85"></div>
+        <div class="hex" style="--hc:#3d6030"></div>
+        <div class="hex" style="--hc:#c4344a; opacity:.6"></div>
+      </div>
+      <!-- Row 3 -->
+      <div class="hex-row">
+        <div class="hex" style="--hc:#c88a1a; opacity:.8"></div>
+        <div class="hex" style="--hc:#3d6030; opacity:.7"></div>
+        <div class="hex" style="--hc:#c4344a"></div>
+        <div class="hex" style="--hc:#d8d0c0; opacity:.35"></div>
+        <div class="hex" style="--hc:#1a2a14"></div>
+      </div>
+      <!-- Row 4 (offset) -->
+      <div class="hex-row">
+        <div class="hex" style="--hc:#e05870; opacity:.55"></div>
+        <div class="hex" style="--hc:#2e4822"></div>
+        <div class="hex" style="--hc:#c88a1a"></div>
+        <div class="hex" style="--hc:#a02838; opacity:.8"></div>
+        <div class="hex" style="--hc:#e4a820; opacity:.65"></div>
+      </div>
+      <!-- Row 5 -->
+      <div class="hex-row">
+        <div class="hex" style="--hc:#1a2a14; opacity:.6"></div>
+        <div class="hex" style="--hc:#c4344a; opacity:.8"></div>
+        <div class="hex" style="--hc:#d8d0c0; opacity:.2"></div>
+        <div class="hex" style="--hc:#c88a1a; opacity:.9"></div>
+        <div class="hex" style="--hc:#2e4822; opacity:.7"></div>
+      </div>
+      <!-- Row 6 (offset) -->
+      <div class="hex-row">
+        <div class="hex" style="--hc:#a02838; opacity:.5"></div>
+        <div class="hex" style="--hc:#e4a820; opacity:.5"></div>
+        <div class="hex" style="--hc:#3d6030"></div>
+        <div class="hex" style="--hc:#c4344a; opacity:.7"></div>
+        <div class="hex" style="--hc:#1a2a14; opacity:.4"></div>
+      </div>
+    </div>
+    <div class="hero-mosaic-overlay"></div>
+    <div class="hero-mosaic-label">Välivaaran luomutila</div>
+  </div>
+</section>
+
+<!-- ── STATS ──────────────────────────────────────────────────────── -->
+<div class="stats" role="region">
+  <div class="stat reveal">
+    <div class="stat-val">100%</div>
+    <div class="stat-label"><span class="lang-fi">Luomusertifioitu</span><span class="lang-sv">Ekocertifierad</span><span class="lang-en">Organic certified</span></div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-val">2</div>
+    <div class="stat-label"><span class="lang-fi">Päätuotetta</span><span class="lang-sv">Huvudprodukter</span><span class="lang-en">Main products</span></div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-val">Kajoo</div>
+    <div class="stat-label"><span class="lang-fi">Juuka, Pohjois-Karjala</span><span class="lang-sv">Juuka, Norra Karelen</span><span class="lang-en">Juuka, North Karelia</span></div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-val">Suora</div>
+    <div class="stat-label"><span class="lang-fi">Myynti tilalta</span><span class="lang-sv">Direktförsäljning</span><span class="lang-en">Direct farm sales</span></div>
+  </div>
+</div>
+
+<!-- ── PRODUCTS ──────────────────────────────────────────────────── -->
+<section class="tuotteet" id="tuotteet">
+  <p class="section-eyebrow">
+    <span class="lang-fi">Tuotteet</span>
+    <span class="lang-sv">Produkter</span>
+    <span class="lang-en">Products</span>
+  </p>
+  <h2 class="section-title">
+    <span class="lang-fi">Luomua suoraan<br><em>luonnon helmestä</em></span>
+    <span class="lang-sv">Ekologiskt direkt<br><em>fran naturens famn</em></span>
+    <span class="lang-en">Organic, straight<br><em>from nature's embrace</em></span>
+  </h2>
+
+  <div class="tuotteet-grid">
+    <!-- Mansikka -->
+    <div class="tuote-card berry" style="--card-accent:var(--berry)">
+      <div class="ph" aria-label="Luomumansikka – kuva tulossa">
+        <div class="ph-icon" aria-hidden="true">🍓</div>
+      </div>
+      <div class="tuote-num">
+        <span class="lang-fi">Tuote 01</span>
+        <span class="lang-sv">Produkt 01</span>
+        <span class="lang-en">Product 01</span>
+      </div>
+      <h3 class="tuote-name">
+        <span class="lang-fi">Luomumansikka</span>
+        <span class="lang-sv">Ekologisk jordgubbe</span>
+        <span class="lang-en">Organic Strawberry</span>
+      </h3>
+      <p class="tuote-desc">
+        <span class="lang-fi">Pohjois-Karjalan puhdas maaperä ja lyhyt, valoisa kesä tekevät Kajoossa kasvatetuista luomumansikoisamme makeita ja aromikkaita. Mehevät marjat poimitaan kiireettä kypsyyden huipulla ja myydään suoraan tilalta.</span>
+        <span class="lang-sv">Norra Karelens rena jordmån och den korta, ljusa sommaren gör var ekologiska jordgubbar söta och aromatiska. Saftiga bär plockas i ro vid mognadens topp och säljs direkt fran gården.</span>
+        <span class="lang-en">North Karelia's pristine soil and the brief, luminous summer make our organically grown strawberries exceptionally sweet and aromatic. Juicy berries are picked at peak ripeness and sold directly from the farm.</span>
+      </p>
+      <div class="tuote-tags">
+        <span class="tag"><span class="lang-fi">Luomusertifioitu</span><span class="lang-sv">Ekocertifierad</span><span class="lang-en">Certified organic</span></span>
+        <span class="tag"><span class="lang-fi">Suoraan tilalta</span><span class="lang-sv">Direktförsäljning</span><span class="lang-en">Direct from farm</span></span>
+        <span class="tag"><span class="lang-fi">Kesäkausi</span><span class="lang-sv">Sommarsäsong</span><span class="lang-en">Summer season</span></span>
+      </div>
+    </div>
+
+    <!-- Hunaja -->
+    <div class="tuote-card honey" style="--card-accent:var(--amber)">
+      <div class="ph" aria-label="Luomuhunaja – kuva tulossa">
+        <div class="ph-icon" aria-hidden="true">🍯</div>
+      </div>
+      <div class="tuote-num">
+        <span class="lang-fi">Tuote 02</span>
+        <span class="lang-sv">Produkt 02</span>
+        <span class="lang-en">Product 02</span>
+      </div>
+      <h3 class="tuote-name">
+        <span class="lang-fi">Luomuhunaja</span>
+        <span class="lang-sv">Ekologisk honung</span>
+        <span class="lang-en">Organic Honey</span>
+      </h3>
+      <p class="tuote-desc">
+        <span class="lang-fi">Mehiläisemme keräävät siitepölyä Pohjois-Karjalan puhtaista metsistä, niityiltä ja luomupelloiltamme. Hunajamme on mehiläishoidon luomustandardien mukaan tuotettua, kylmäpuristettua ja lisäaineetonta.</span>
+        <span class="lang-sv">Vara bin samlar pollen fran Norra Karelens rena skogar, ängarna och vara ekologiska fält. Var honung produceras enligt biavlingens ekologiska standarder, är kall pressad och utan tillsatser.</span>
+        <span class="lang-en">Our bees collect pollen from North Karelia's pristine forests, meadows and our organic fields. The honey is produced to organic beekeeping standards, cold-pressed and additive-free.</span>
+      </p>
+      <div class="tuote-tags">
+        <span class="tag"><span class="lang-fi">Kylmäpuristettu</span><span class="lang-sv">Kall pressad</span><span class="lang-en">Cold-pressed</span></span>
+        <span class="tag"><span class="lang-fi">Luomuhunaja</span><span class="lang-sv">Ekologisk honung</span><span class="lang-en">Organic honey</span></span>
+        <span class="tag"><span class="lang-fi">Lisäaineeton</span><span class="lang-sv">Utan tillsatser</span><span class="lang-en">Additive-free</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STORY ──────────────────────────────────────────────────────── -->
+<section class="tarina" id="tarina">
+  <div class="tarina-inner">
+    <div class="tarina-text">
+      <p class="section-eyebrow">
+        <span class="lang-fi">Tilan tarina</span>
+        <span class="lang-sv">Gårdens berättelse</span>
+        <span class="lang-en">Our story</span>
+      </p>
+      <h2 class="section-title">
+        <span class="lang-fi">Luomua sydämellä,<br><em>metsän sylissä</em></span>
+        <span class="lang-sv">Ekologiskt med hjärta,<br><em>i skogens famn</em></span>
+        <span class="lang-en">Organic at heart,<br><em>cradled by the forest</em></span>
+      </h2>
+      <div class="tarina-body">
+        <p>
+          <span class="lang-fi">Välivaaran luomutila sijaitsee Kajoossa, Juuan kunnan hiljaisella maaseutualueella Pohjois-Karjalassa. Tila on pieni perhetila, jossa luomuun panostetaan kokonaisvaltaisesti: hoidamme maata, mehiläisiä ja kasveja samalla periaatteella, luonnon ehdoilla.</span>
+          <span class="lang-sv">Välivaara ekologiska gård ligger i Kajoo, i Juuka kommuns lugna landsbygdsomrade i Norra Karelen. Gården ar ett litet familjeföretag där vi engagerar oss helhjärtat i ekologiskt jordbruk: vi tar hand om marken, bina och växterna enligt samma princip, pa naturens villkor.</span>
+          <span class="lang-en">Välivaaran luomutila is located in Kajoo, in the quiet rural area of Juuka municipality in North Karelia. It is a small family farm where we commit wholeheartedly to organic farming: we tend the soil, bees and plants by the same principle, on nature's own terms.</span>
+        </p>
+        <p>
+          <span class="lang-fi">Mansikanviljely ja mehiläishoito täydentävät toisiaan kauniisti. Mehiläiset pölyttävät mansikkamme, ja mansikat tarjoavat mehiläisille rikas siitepölyn. Yhdessä ne luovat luomun, joka maistuu Pohjois-Karjalalta.</span>
+          <span class="lang-sv">Jordgubbsodlingen och biavlingen kompletterar varandra vackert. Bina pollinerar vara jordgubbar, och jordgubbarna ger bina riklig pollen. Tillsammans skapar de ett ekologiskt jordbruk som smakar Norra Karelen.</span>
+          <span class="lang-en">Strawberry growing and beekeeping complement each other beautifully. The bees pollinate our strawberries, and the strawberries offer the bees an abundance of pollen. Together they create an organic cycle that tastes of North Karelia.</span>
+        </p>
+        <p>
+          <span class="lang-fi">Uskomme, että paras ruoka syntyy rauhassa, kunnioittaen maaperää ja aikaa. Siksi emme kiirehdi, emme käytä kemiallisia torjunta-aineita, emmekä jätä luonnon tasapainoa sivuun.</span>
+          <span class="lang-sv">Vi tror att den bästa maten skapas i lugn och ro, med respekt för jordens och tidens villkor. Därför har vi inte bråttom, vi använder inga kemiska bekämpningsmedel och vi ignorerar inte naturens balans.</span>
+          <span class="lang-en">We believe the best food grows slowly, with respect for the soil and for time. That is why we do not hurry, we use no chemical pesticides, and we never ignore nature's balance.</span>
+        </p>
+      </div>
+      <div class="tarina-quote">
+        <blockquote>
+          <span class="lang-fi">"Parhaimmillaan luomu ei ole vain tuotantotapa, vaan tapa elää maan kanssa."</span>
+          <span class="lang-sv">"Ekologiskt jordbruk i sin bästa form är inte bara en produktionsmetod, utan ett sätt att leva med marken."</span>
+          <span class="lang-en">"At its best, organic farming is not just a production method, but a way of living with the land."</span>
+        </blockquote>
+        <cite>Heidi Tanskanen, Välivaaran luomutila</cite>
+      </div>
+    </div>
+    <div class="tarina-visual">
+      <div class="tarina-ph-main" aria-label="Tilakuva – tulossa">
+        <div class="ph-icon" aria-hidden="true">🌿</div>
+      </div>
+      <div class="tarina-ph-duo">
+        <div class="tarina-ph-sm" aria-label="Mansikkarivit – tulossa">
+          <div class="ph-icon" aria-hidden="true">🍓</div>
+        </div>
+        <div class="tarina-ph-sm" aria-label="Mehiläiset – tulossa">
+          <div class="ph-icon" aria-hidden="true">🐝</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VUOSIKELLO ─────────────────────────────────────────────────── -->
+<section class="vuosikello" id="vuosikello">
+  <div class="vuosikello-header reveal">
+    <p class="section-eyebrow">
+      <span class="lang-fi">Satokalenteri</span>
+      <span class="lang-sv">Skördekalender</span>
+      <span class="lang-en">Harvest calendar</span>
+    </p>
+    <h2 class="section-title">
+      <span class="lang-fi">Vuosikello: tilan rytmi</span>
+      <span class="lang-sv">Arsklockan: gardens rytm</span>
+      <span class="lang-en">Year wheel: the farm's rhythm</span>
+    </h2>
+    <p class="section-lead">
+      <span class="lang-fi">Luomutila elää luonnon tahdissa. Jokaisella kuukaudella on oma tehtävänsä, oma kiireensä ja oma hiljaisuutensa. Näin vuosi Välivaaralla kulkee.</span>
+      <span class="lang-sv">En ekologisk gård lever i naturens takt. Varje manad har sin uppgift, sin stress och sin stillhet. Sa har passerar aret pa Välivaara.</span>
+      <span class="lang-en">An organic farm lives in nature's rhythm. Each month has its purpose, its urgency and its quiet. This is how the year passes at Välivaara.</span>
+    </p>
+  </div>
+
+  <div class="kello-grid">
+    <!-- Jan -->
+    <div class="kello-month">
+      <div class="kello-month-name"><span class="lang-fi">Tammikuu</span><span class="lang-sv">Januari</span><span class="lang-en">January</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot"></div><div class="kello-dot"></div><div class="kello-dot"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Talvilepoa, suunnittelu</span><span class="lang-sv">Vintervila, planering</span><span class="lang-en">Winter rest, planning</span></div>
+    </div>
+    <!-- Feb -->
+    <div class="kello-month">
+      <div class="kello-month-name"><span class="lang-fi">Helmikuu</span><span class="lang-sv">Februari</span><span class="lang-en">February</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot"></div><div class="kello-dot"></div><div class="kello-dot"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Siemenvalinta, tilaukset</span><span class="lang-sv">Frövalet, beställningar</span><span class="lang-en">Seed selection, orders</span></div>
+    </div>
+    <!-- Mar -->
+    <div class="kello-month active-light">
+      <div class="kello-month-name"><span class="lang-fi">Maaliskuu</span><span class="lang-sv">Mars</span><span class="lang-en">March</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot green"></div><div class="kello-dot green"></div><div class="kello-dot"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Mehiläisten herätys, puutarhan valmistelu</span><span class="lang-sv">Biuppvaknande, trädgårdsberedning</span><span class="lang-en">Bee awakening, garden prep</span></div>
+    </div>
+    <!-- Apr -->
+    <div class="kello-month active-light">
+      <div class="kello-month-name"><span class="lang-fi">Huhtikuu</span><span class="lang-sv">April</span><span class="lang-en">April</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot green"></div><div class="kello-dot green"></div><div class="kello-dot green"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Istutukset, maan muokkaus</span><span class="lang-sv">Plantering, markberedning</span><span class="lang-en">Planting, soil preparation</span></div>
+    </div>
+    <!-- May -->
+    <div class="kello-month active-light">
+      <div class="kello-month-name"><span class="lang-fi">Toukokuu</span><span class="lang-sv">Maj</span><span class="lang-en">May</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot green"></div><div class="kello-dot green"></div><div class="kello-dot berry"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Mansikantaimet, pölytys alkaa</span><span class="lang-sv">Jordgubbsplantor, pollinering börjar</span><span class="lang-en">Strawberry seedlings, pollination starts</span></div>
+    </div>
+    <!-- Jun -->
+    <div class="kello-month active-berry">
+      <div class="kello-month-name"><span class="lang-fi">Kesäkuu</span><span class="lang-sv">Juni</span><span class="lang-en">June</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot berry"></div><div class="kello-dot berry"></div><div class="kello-dot amber"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Mansikkakausi alkaa, hunajaa kertyy</span><span class="lang-sv">Jordgubbssäsong börjar, honung samlas</span><span class="lang-en">Strawberry season starts, honey accumulates</span></div>
+    </div>
+    <!-- Jul -->
+    <div class="kello-month active-berry">
+      <div class="kello-month-name"><span class="lang-fi">Heinäkuu</span><span class="lang-sv">Juli</span><span class="lang-en">July</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot berry"></div><div class="kello-dot berry"></div><div class="kello-dot berry"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Satokäsinä, vilkkain myyntikausi</span><span class="lang-sv">Skördehänder, livligaste säsong</span><span class="lang-en">Peak harvest, busiest sales season</span></div>
+    </div>
+    <!-- Aug -->
+    <div class="kello-month active-amber">
+      <div class="kello-month-name"><span class="lang-fi">Elokuu</span><span class="lang-sv">Augusti</span><span class="lang-en">August</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot berry"></div><div class="kello-dot amber"></div><div class="kello-dot amber"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Hunajansato, mansikan loppukausi</span><span class="lang-sv">Honingsskörd, slutet av jordgubbssäsongen</span><span class="lang-en">Honey harvest, late strawberry season</span></div>
+    </div>
+    <!-- Sep -->
+    <div class="kello-month active-amber">
+      <div class="kello-month-name"><span class="lang-fi">Syyskuu</span><span class="lang-sv">September</span><span class="lang-en">September</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot amber"></div><div class="kello-dot amber"></div><div class="kello-dot"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Hunajan kypsytys, kauden päätös</span><span class="lang-sv">Honingens mogning, säsongsavslut</span><span class="lang-en">Honey ripening, season close</span></div>
+    </div>
+    <!-- Oct -->
+    <div class="kello-month">
+      <div class="kello-month-name"><span class="lang-fi">Lokakuu</span><span class="lang-sv">Oktober</span><span class="lang-en">October</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot green"></div><div class="kello-dot"></div><div class="kello-dot"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Talvisuojaus, arviointi</span><span class="lang-sv">Vinterförberedelse, utvärdering</span><span class="lang-en">Winter prep, evaluation</span></div>
+    </div>
+    <!-- Nov -->
+    <div class="kello-month">
+      <div class="kello-month-name"><span class="lang-fi">Marraskuu</span><span class="lang-sv">November</span><span class="lang-en">November</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot"></div><div class="kello-dot"></div><div class="kello-dot"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Mehiläisten talvihoito, tilaukset</span><span class="lang-sv">Biövervintring, beställningar</span><span class="lang-en">Bee winter care, advance orders</span></div>
+    </div>
+    <!-- Dec -->
+    <div class="kello-month">
+      <div class="kello-month-name"><span class="lang-fi">Joulukuu</span><span class="lang-sv">December</span><span class="lang-en">December</span></div>
+      <div class="kello-dot-row">
+        <div class="kello-dot"></div><div class="kello-dot"></div><div class="kello-dot"></div>
+      </div>
+      <div class="kello-activity"><span class="lang-fi">Lepo, hunajamyynti jouluksi</span><span class="lang-sv">Vila, honungsförsäljning till julen</span><span class="lang-en">Rest, honey sales for Christmas</span></div>
+    </div>
+  </div>
+
+  <div class="kello-legend">
+    <div class="kello-legend-item">
+      <div class="kello-legend-dot" style="background:var(--berry)"></div>
+      <span class="lang-fi">Mansikkakausi</span><span class="lang-sv">Jordgubbssäsong</span><span class="lang-en">Strawberry season</span>
+    </div>
+    <div class="kello-legend-item">
+      <div class="kello-legend-dot" style="background:var(--amber)"></div>
+      <span class="lang-fi">Hunajasato</span><span class="lang-sv">Honingsskörd</span><span class="lang-en">Honey harvest</span>
+    </div>
+    <div class="kello-legend-item">
+      <div class="kello-legend-dot" style="background:var(--forest-lt)"></div>
+      <span class="lang-fi">Peltotyöt</span><span class="lang-sv">Fältarbete</span><span class="lang-en">Field work</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── KESTAVA ────────────────────────────────────────────────────── -->
+<section class="kestava" id="kestava">
+  <div class="kestava-inner">
+    <div>
+      <p class="section-eyebrow">
+        <span class="lang-fi">Kestava viljely</span>
+        <span class="lang-sv">Hallbar odling</span>
+        <span class="lang-en">Sustainable farming</span>
+      </p>
+      <h2 class="section-title">
+        <span class="lang-fi">Luomu on<br><em>lupaus maalle</em></span>
+        <span class="lang-sv">Ekologiskt ar ett<br><em>löfte till marken</em></span>
+        <span class="lang-en">Organic is a<br><em>promise to the land</em></span>
+      </h2>
+      <div class="periaate-list">
+        <div class="periaate reveal">
+          <div class="periaate-icon">🌱</div>
+          <div class="periaate-text">
+            <h4><span class="lang-fi">Ei kemiallisia torjunta-aineita</span><span class="lang-sv">Inga kemiska bekämpningsmedel</span><span class="lang-en">No chemical pesticides</span></h4>
+            <p><span class="lang-fi">Luomusertifiointi tarkoittaa, ettei pelloillamme käytetä synteettisiä torjunta-aineita tai keinotekoisia lannoitteita.</span><span class="lang-sv">Ekocertifiering innebär att vi inte använder syntetiska bekämpningsmedel eller konstgödsel pa vara fält.</span><span class="lang-en">Organic certification means we use no synthetic pesticides or artificial fertilisers on our fields.</span></p>
+          </div>
+        </div>
+        <div class="periaate reveal">
+          <div class="periaate-icon">🐝</div>
+          <div class="periaate-text">
+            <h4><span class="lang-fi">Mehiläiset osana ekosysteemia</span><span class="lang-sv">Bina som del av ekosystemet</span><span class="lang-en">Bees as part of the ecosystem</span></h4>
+            <p><span class="lang-fi">Mehiläisemme tekevät muutakin kuin tuottavat hunajaa. Ne pölyttävät mansikkamme ja tukevat koko ympäröivän luonnon monimuotoisuutta.</span><span class="lang-sv">Vara bin gör mer än att producera honung. De pollinerar vara jordgubbar och stöder den biologiska mangfalden i hela den omgivande naturen.</span><span class="lang-en">Our bees do more than produce honey. They pollinate our strawberries and support biodiversity throughout the surrounding nature.</span></p>
+          </div>
+        </div>
+        <div class="periaate reveal">
+          <div class="periaate-icon">🌍</div>
+          <div class="periaate-text">
+            <h4><span class="lang-fi">Paikallinen, puhdas, vastuullinen</span><span class="lang-sv">Lokalt, rent, ansvarsfullt</span><span class="lang-en">Local, clean, responsible</span></h4>
+            <p><span class="lang-fi">Myymme suoraan, läheltä. Ei pitkiä kuljetuksia, ei turhia pakkauksia, ei välikäsiä tuottajan ja syöjan välillä.</span><span class="lang-sv">Vi säljer direkt, nära. Inga langa transporter, inga onödiga förpackningar, inga mellanhänder mellan producent och konsument.</span><span class="lang-en">We sell directly, locally. No long transports, no unnecessary packaging, no middlemen between producer and consumer.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kestava-cert reveal">
+      <div class="kestava-cert-title">
+        <span class="lang-fi">Luomusertifiointi</span>
+        <span class="lang-sv">Ekocertifiering</span>
+        <span class="lang-en">Organic certification</span>
+      </div>
+      <p>
+        <span class="lang-fi">Välivaaran luomutila on Elintarviketurvallisuusviraston (Ruokavirasto) valvoma luomutila. Viljelyämme tarkastetaan vuosittain, ja noudatamme EU:n luomuasetusta jokaisessa tuotannon vaiheessa.</span>
+        <span class="lang-sv">Välivaara ekologiska gård kontrolleras av Livsmedelsverket (Ruokavirasto). Var odling inspekteras arligen och vi följer EU:s ekologiska förordning i varje steg av produktionen.</span>
+        <span class="lang-en">Välivaaran luomutila is supervised by the Finnish Food Authority (Ruokavirasto). Our cultivation is inspected annually and we comply with the EU organic regulation at every stage of production.</span>
+      </p>
+      <p>
+        <span class="lang-fi">Luomutilanne voi luottaa: raaka-aineemme ovat aidosti luomua, alkuperä on tiedossa ja tuotantoketju on lyhyt ja läpinäkyvä.</span>
+        <span class="lang-sv">Du kan lita pa var ekologiska gård: vara ravaror är äkta ekologiska, ursprunget är känt och produktionskedjan är kort och transparent.</span>
+        <span class="lang-en">You can trust our organic farm: our raw materials are genuinely organic, the origin is known and the production chain is short and transparent.</span>
+      </p>
+      <div class="cert-badge">
+        <span>✓</span>
+        <span><span class="lang-fi">EU Luomu – Suomi</span><span class="lang-sv">EU Ekologisk – Finland</span><span class="lang-en">EU Organic – Finland</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ────────────────────────────────────────────────────── -->
+<section class="galleria" id="galleria">
+  <p class="section-eyebrow">
+    <span class="lang-fi">Tilalta</span>
+    <span class="lang-sv">Fran gården</span>
+    <span class="lang-en">From the farm</span>
+  </p>
+  <h2 class="section-title">
+    <span class="lang-fi">Elämaa <em>Välivaaralla</em></span>
+    <span class="lang-sv">Livet pa <em>Välivaara</em></span>
+    <span class="lang-en">Life at <em>Välivaara</em></span>
+  </h2>
+  <div class="galleria-grid">
+    <div class="gal-cell tall" aria-label="Tilakuva – tulossa">
+      <div class="ph-icon" aria-hidden="true">🌿</div>
+    </div>
+    <div class="gal-cell" aria-label="Mansikkakausi – tulossa">
+      <div class="ph-icon" aria-hidden="true">🍓</div>
+    </div>
+    <div class="gal-cell" aria-label="Mehiläiset – tulossa">
+      <div class="ph-icon" aria-hidden="true">🐝</div>
+    </div>
+    <div class="gal-cell" aria-label="Hunaja – tulossa">
+      <div class="ph-icon" aria-hidden="true">🍯</div>
+    </div>
+    <div class="gal-cell" aria-label="Pohjois-Karjalan maisema – tulossa">
+      <div class="ph-icon" aria-hidden="true">🌲</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────────────────── -->
+<section class="yhteystiedot" id="yhteystiedot">
+  <div class="yht-inner">
+    <div class="yht-info">
+      <p class="section-eyebrow">
+        <span class="lang-fi">Yhteystiedot</span>
+        <span class="lang-sv">Kontaktuppgifter</span>
+        <span class="lang-en">Contact</span>
+      </p>
+      <h2 class="section-title">
+        <span class="lang-fi">Ota yhteyttä<br><em>tai tule käymään</em></span>
+        <span class="lang-sv">Kontakta oss<br><em>eller kom pa besök</em></span>
+        <span class="lang-en">Get in touch<br><em>or come visit</em></span>
+      </h2>
+      <div class="yht-rows">
+        <div class="yht-row">
+          <span class="yht-label"><span class="lang-fi">Osoite</span><span class="lang-sv">Adress</span><span class="lang-en">Address</span></span>
+          <span class="yht-val">Välivaarantie 6<br>83880 Kajoo (Juuka)</span>
+        </div>
+        <div class="yht-row">
+          <span class="yht-label"><span class="lang-fi">Puhelin</span><span class="lang-sv">Telefon</span><span class="lang-en">Phone</span></span>
+          <span class="yht-val"><a href="tel:+358505845573">050 584 5573</a></span>
+        </div>
+        <div class="yht-row">
+          <span class="yht-label"><span class="lang-fi">Sähköposti</span><span class="lang-sv">E-post</span><span class="lang-en">Email</span></span>
+          <span class="yht-val"><a href="mailto:heidi.tanskanen@unelmametsa.fi">heidi.tanskanen@unelmametsa.fi</a></span>
+        </div>
+        <div class="yht-row">
+          <span class="yht-label"><span class="lang-fi">Myynti</span><span class="lang-sv">Försäljning</span><span class="lang-en">Sales</span></span>
+          <span class="yht-val">
+            <span class="lang-fi">Suoraan tilalta – soita tai lähetä sähköpostia</span>
+            <span class="lang-sv">Direkt fran gården – ring eller skicka e-post</span>
+            <span class="lang-en">Direct from farm – call or email us</span>
+          </span>
+        </div>
+        <div class="yht-row">
+          <span class="yht-label"><span class="lang-fi">Facebook</span><span class="lang-sv">Facebook</span><span class="lang-en">Facebook</span></span>
+          <span class="yht-val"><a href="https://www.facebook.com/p/Välivaaran-luomutila-100077578710317/" target="_blank" rel="noopener">Välivaaran luomutila</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="yht-map">
+      <iframe
+        title="Välivaaran luomutila kartta"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=29.1,62.95,29.35,63.05&layer=mapnik&marker=63.00,29.22"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-brand">Välivaaran luomutila</div>
+  <div class="footer-credit">
+    <span class="lang-fi">Demo, suunnitellut </span>
+    <span class="lang-sv">Demo, designad av </span>
+    <span class="lang-en">Demo, designed by </span>
+    <a href="https://antonjalonen.fi" target="_blank" rel="noopener">Anton Jalonen</a>
+    &mdash;
+    <span class="lang-fi">Virallinen julkaisu odottaa tilan hyväksyntää</span>
+    <span class="lang-sv">Officiell lansering väntar pa gårdens godkännande</span>
+    <span class="lang-en">Official launch pending farm approval</span>
+  </div>
+</footer>
+
+<!-- ── JS ─────────────────────────────────────────────────────────── -->
+<script>
+  // Language toggle
+  function setLang(lang) {
+    document.body.className = document.body.className
+      .replace(/\blang-\w+/g, '').trim();
+    if (lang !== 'fi') document.body.classList.add('lang-' + lang);
+    document.querySelectorAll('.lang-btns button').forEach(b => {
+      b.classList.toggle('active', b.id === 'btn-' + lang);
+    });
+    localStorage.setItem('valivaara-lang', lang);
+    document.documentElement.lang = lang;
+  }
+  // Restore saved language
+  const saved = localStorage.getItem('valivaara-lang');
+  if (saved && saved !== 'fi') setLang(saved);
+  document.getElementById('btn-fi').classList.toggle('active', !saved || saved === 'fi');
+
+  // Mobile menu
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
